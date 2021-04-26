@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Опрос-форма - {{name}}</h1>
+    <h2>Автор - {{author}}</h2>
+    <h3>Дата создания - {{date}}</h3>
+    <h3>Вопросы:</h3>
+    <form action="" method="post">
+        <h2>{{que}}</h2>
+        <p>
+            {{ form.answer.label }}<br>
+            {{ form.answer(class="form-control") }}<br>
+            {% for error in form.answer.errors %}
+        <p content="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+
+        {% endfor %}
+
+        </p>
+
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+        {{message}}
+    </form>
+
+
+</div>
+{% endblock %}

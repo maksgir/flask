@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Личный кабинет</h1>
+<div class="col-md6 border rounded">
+    <h2><em>Логин</em> - <a style="font-style: italic;font-size: normal">{{ current_user.name }}</a></h2>
+    <h2> <em>Почта</em> - <a style="font-style: italic;font-size: normal">{{ current_user.email }}</a></h2>
+    <h2> <em>Личная информация</em> - <a style="font-style: italic;font-size: normal">{{ current_user.about }}</a></h2>
+    <h2> <em>Дата регистрации</em> - <a style="font-style: italic;font-size: normal">{{ current_user.created_date }}</a></h2>
+    {% for item in news%}
+    {% if current_user.is_authenticated and current_user == item.user %}
+    <div class="col-md6 border rounded">
+        <h2>{{item.title}}</h2>
+        <div>
+            {{item.content}}
+            <a href="/news_open/{{ item.id }}" class="btn btn-success">
+                Открыть опрос
+            </a>
+            <a href="/news_delete/{{ item.id }}" class="btn btn-warning">
+                Результаты опроса
+            </a>
+            <a href="/news_delete/{{ item.id }}" class="btn btn-danger">
+                Удалить
+            </a>
+
+        </div>
+        <div>
+            Дата создания - {{item.created_date}}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <a class="btn btn-success" href="/news">Создать опрос-форму</a>
+
+</div>
+{% endblock %}

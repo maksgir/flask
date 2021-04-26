@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Заполнение опроса</h1>
+<form action="" method="post">
+    <h2>Запишите вопросы опрос-формы</h2>
+    {% for elem in form %}
+    <h2>Вопрос {{ loop.index }}</h2>
+    <p>
+        {{ elem.questions.label }}<br>
+        {{ elem.questions(class="form-control") }}<br>
+        {% for error in elem.questions.errors %}
+            <p content="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+
+        {% endfor %}
+
+    </p>
+    {% endfor %}
+    <p>{{ form[-1].submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+</form>
+{% endblock %}
